@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Portfolio | Resume & Cover Letter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f8f9fa;
+            --accent: #ffd166;
+            --text: #e6e6e6;
+            --text-dark: #333;
+            --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --background: #0a192f;
+            --review-darker: #112240;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(30, 30, 60, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(40, 40, 80, 0.6) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Back Button Styles */
+        .back-button-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            background: rgba(17, 34, 64, 0.8);
+            color: var(--accent);
+            border: 1px solid rgba(255, 209, 102, 0.3);
+            padding: 8px 15px 8px 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 209, 102, 0.1);
+            border-color: var(--accent);
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .review-section {
+            background-color: var(--review-darker);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255, 209, 102, 0.2);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+        }
+        
+        .document-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .document-card {
+            background-color: rgba(30, 30, 60, 0.5);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+        }
+        
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .document-title {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin: 0;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 209, 102, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 500px;
+            border-radius: var(--border-radius);
+            border: none;
+            margin-top: 1rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .document-description {
+            color: var(--text);
+            opacity: 0.9;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .review-section {
+                padding: 1.5rem;
+            }
+            
+            .document-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .document-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .pdf-viewer {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="../LearnLog.html" class="back-button">
+            <i class="material-icons">arrow_back_ios</i> Back
+        </a>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>My Professional Portfolio</h1>
+            <p class="subtitle">Resume & Cover Letter</p>
+        </header>
+
+        <div class="review-section">
+            <h2>About My Documents</h2>
+            <p>Below you'll find my professional resume and cover letter. These documents represent my skills, experience, and professional journey. I've carefully crafted them to showcase my qualifications and what I can bring to potential opportunities.</p>
+            
+            <h3>Key Features of My Resume:</h3>
+            <ul>
+                <li><strong>Professional Summary:</strong> Concise overview of my skills and career objectives</li>
+                <li><strong>Work Experience:</strong> Detailed account of my professional journey with key achievements</li>
+                <li><strong>Education:</strong> Academic background and relevant certifications</li>
+                <li><strong>Skills:</strong> Technical and soft skills that make me a valuable candidate</li>
+                <li><strong>Projects:</strong> Notable work that demonstrates my capabilities</li>
+            </ul>
+            
+            <h3>About My Cover Letter:</h3>
+            <p>My cover letter is tailored to complement my resume by providing context to my career path and highlighting why I would be a great fit for specific roles. It demonstrates my communication skills and professional attitude.</p>
+        </div>
+
+        <div class="document-container">
+            <!-- Resume Section -->
+            <div class="document-card">
+                <div class="document-header">
+                    <h3 class="document-title">My Resume</h3>
+                    <div class="document-actions">
+                        <a href="../thumbnails/Resume.pdf" class="btn btn-primary" download="YourName_Resume.pdf">
+                            <i class="material-icons">download</i> Download
+                        </a>
+                        <button class="btn btn-outline" onclick="toggleView('resume')">
+                            <i class="material-icons">visibility</i> View
+                        </button>
+                    </div>
+                </div>
+                <p class="document-description">
+                    My resume provides a comprehensive overview of my professional background, including my work experience, education, skills, and notable achievements. It's designed to be clear, concise, and impactful.
+                </p>
+                <iframe id="resume-viewer" class="pdf-viewer" style="display: none;" src="../thumbnails/Resume.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+            </div>
+            
+            <!-- Cover Letter Section -->
+            <div class="document-card">
+                <div class="document-header">
+                    <h3 class="document-title">My Cover Letter</h3>
+                    <div class="document-actions">
+                        <a href="../thumbnails/CoverLetter.pdf" class="btn btn-primary" download="YourName_CoverLetter.pdf">
+                            <i class="material-icons">download</i> Download
+                        </a>
+                        <button class="btn btn-outline" onclick="toggleView('cover-letter')">
+                            <i class="material-icons">visibility</i> View
+                        </button>
+                    </div>
+                </div>
+                <p class="document-description">
+                    My cover letter complements my resume by providing context to my career journey and highlighting my enthusiasm for potential opportunities. It's tailored to demonstrate how my skills and experience align with specific roles.
+                </p>
+                <iframe id="cover-letter-viewer" class="pdf-viewer" style="display: none;" src="../thumbnails/CoverLetter.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to toggle PDF viewer visibility
+        function toggleView(documentType) {
+            const viewer = document.getElementById(`${documentType}-viewer`);
+            if (viewer.style.display === 'none') {
+                viewer.style.display = 'block';
+            } else {
+                viewer.style.display = 'none';
+            }
+        }
+        
+        // Sample post data for related articles (if you want to keep this section)
+        const posts = [
+            {
+                id: 1,
+                title: "Profiling Sheet",
+                excerpt: "An overview of my personal attributes, aspirations, and core values.",
+                image: "../thumbnails/profile.png",
+                url: "2025-02-10.html",
+                date: "2025-02-10"
+            },
+            {
+                id: 2,
+                title: "Jam Session",
+                excerpt: "A recorded 1 minute public speaking .",
+                image: "../thumbnails/Jam.png",
+                url: "2025-05-07.html",
+                date: "2025-03-04"
+            },
+            {
+                id:3,
+                title: "Group Discussion",
+                excerpt: "A thoughtful group discussion by students with the given theme.",
+                image: "../thumbnails/groupDiscussion.png",
+                url: "2025-04-30.html",
+                date: "2025-04-30"
+            }
+        ];
+
+        // Function to load related articles (if you want to keep this section)
+        function loadRelatedArticles() {
+            const container = document.getElementById('relatedArticles');
+            if (container) {
+                posts.forEach(post => {
+                    const articleHTML = `
+                        <div class="article-card" onclick="window.location.href='${post.url}'">
+                            <img src="${post.image}" alt="${post.title}" class="article-img">
+                            <div class="article-content">
+                                <h3 class="article-title">${post.title}</h3>
+                                <p class="article-excerpt">${post.excerpt}</p>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span class="post-date" style="color: var(--accent); font-size: 0.9rem;">${post.date}</span>
+                                    <a href="${post.url}" class="read-btn">Read More →</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.insertAdjacentHTML('beforeend', articleHTML);
+                });
+            }
+        }
+
+        // Load articles when page loads (if you want to keep this section)
+        window.addEventListener('DOMContentLoaded', loadRelatedArticles);
+    </script>
+</body>
+</html>

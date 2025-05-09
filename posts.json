@@ -1,0 +1,38 @@
+[
+  {
+    "name": "My Professional Portfolio | Resume & Cover Letter",
+    "excerpt" : "Below you'll find my professional resume and cover letter. These documents represent my skills, experience, and professional journey. I've carefully crafted them to showcase my qualifications and what I can bring to potential opportunities",
+    "date": "2025-04-31",
+    "thumbnail": "resume.png"
+  },
+  {
+    "name": "Profiling Sheet",
+    "excerpt" : "An overview of my personal attributes, aspirations, and core values.",
+    "date": "2025-02-10",
+    "thumbnail": "profile.png"
+  },
+  {
+    "name": "Jam Session",
+    "excerpt" : "A recorded 1 minute public speaking .",
+    "date": "2025-05-07",
+    "thumbnail": "Jam.png"
+  },
+  {
+    "name": "Movie Review",
+    "excerpt" : "An analytical review of The Pursuit of Happyness highlighting its key themes.",
+    "date": "2025-03-11",
+    "thumbnail": "movie.png"
+  },
+  {
+    "name": "Group Discussion",
+    "excerpt" : "A thoughtful group discussion by students with the given theme.",
+    "date": "2025-04-30",
+    "thumbnail": "groupDiscussion.jpg"
+  },
+  {
+    "name": "Presentation - Intelligent Tutoring System",
+    "excerpt" : "This presentation explores Intelligent Tutoring Systems (ITS), AI-powered educational platforms that provide personalized instruction and feedback to learners without human teacher intervention.",
+    "date": "2025-05-08",
+    "thumbnail": "presentation.png"
+  }
+]

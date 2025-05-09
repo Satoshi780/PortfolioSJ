@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Session - Susparsh Jakhmola</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f8f9fa;
+            --accent: #ffd166;
+            --text: #e6e6e6;
+            --text-dark: #333;
+            --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+            --background: #0a192f;
+            --review-darker: #112240;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            margin: 0;
+            padding: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(30, 30, 60, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(40, 40, 80, 0.6) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Back Button Styles */
+        .back-button-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .back-button {
+            display: flex;
+            align-items: center;
+            background: rgba(17, 34, 64, 0.8);
+            color: var(--accent);
+            border: 1px solid rgba(255, 209, 102, 0.3);
+            padding: 8px 15px 8px 10px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .back-button:hover {
+            background: rgba(255, 209, 102, 0.1);
+            border-color: var(--accent);
+            transform: translateX(-3px);
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+        
+        .brand-logo {
+            width: 100%;
+            max-width: 200px;
+            display: block;
+            margin: 1.5rem auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .presentation-section {
+            background-color: var(--review-darker);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .presentation-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.8rem;
+            border-bottom: 1px solid rgba(255, 209, 102, 0.2);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            color: var(--primary);
+            margin-top: 1.5rem;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .team-member {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .member-name {
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .member-role {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .read-more {
+            margin-top: 3rem;
+        }
+        
+        .related-articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .article-card {
+            background-color: var(--review-darker);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+        
+        .article-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .article-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .article-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+        
+        .article-title {
+            color: var(--text);
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .article-excerpt {
+            color: var(--text);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        
+        .read-btn {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .read-btn:hover {
+            color: var(--primary);
+        }
+        
+        /* Public Speaking Guide Styles */
+        .guide-step {
+            background-color: rgba(17, 34, 64, 0.5);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .guide-step h3 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+        
+        .guide-step ul {
+            padding-left: 1.2rem;
+        }
+        
+        .guide-step li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .peel-method {
+            background-color: rgba(78, 205, 196, 0.1);
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--secondary);
+            margin: 1rem 0;
+        }
+        
+        .peel-method h4 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: rgba(17, 34, 64, 0.5);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background-color: rgba(255, 107, 107, 0.2);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .topic-card {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1));
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .topic-card h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .back-button-container {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .back-button {
+                padding: 6px 12px 6px 8px;
+                font-size: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .presentation-section {
+                padding: 1.5rem;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .related-articles {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button  -->
+    <div class="back-button-container">
+        <a href="../LearnLog.html" class="back-button">
+            <i class="material-icons">arrow_back_ios</i> Back
+        </a>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Jam Session</h1>
+            <p class="subtitle">Spontaneous Speaking by Susparsh Jakhmola</p>
+            <img src="../thumbnails/Jam.png" alt="Jam Session Logo" class="brand-logo">
+        </header>
+        
+        <!-- AI vs Human Topic Section -->
+        <div class="presentation-section">
+            <h2>AI Buddies vs. Human Friends – Future of Companionship</h2>
+            
+            <div class="topic-card">
+                <h3>Topic Analysis</h3>
+                <p>This JAM topic explores the evolving relationship between artificial intelligence and human social interaction, questioning whether AI companions can replace or complement human friendships in the future.</p>
+                
+                <h4>Potential Arguments:</h4>
+                <ul>
+                    <li><strong>For AI Companions:</strong> Always available, personalized interactions, no judgment, 24/7 support</li>
+                    <li><strong>For Human Friends:</strong> Emotional depth, shared experiences, physical presence, genuine empathy</li>
+                    <li><strong>Hybrid Approach:</strong> AI could supplement human relationships but not replace them entirely</li>
+                </ul>
+            </div>
+            
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/wn0p0amzb18?si=SMqjIAUtDADvYQke" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <p>This impromptu speech demonstrates how to structure thoughts quickly on a complex topic using the public speaking framework below.</p>
+        </div>
+        
+        <!-- Public Speaking Guide Section -->
+        <div class="presentation-section">
+            <h2>Public Speaking Made Simple</h2>
+            <p>A step-by-step guide to effective impromptu speaking, adapted from the student's guide to public speaking.</p>
+            
+            <div class="guide-step">
+                <h3>1. Set Your Compass</h3>
+                <ul>
+                    <li><strong>Goal:</strong> Decide exactly why you're speaking</li>
+                    <li>Write one sentence that starts with "After my talk, my classmates will..." (e.g., "...understand why human connection remains essential in the AI age")</li>
+                    <li>Circle the single most important verb ("know," "believe," "try") – that becomes your purpose</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>2. Know Your Crew</h3>
+                <ul>
+                    <li><strong>Audience:</strong> Friends, not judges</li>
+                    <li>List 3 things your audience already understands about the topic (e.g., "AI is advancing rapidly," "Loneliness is increasing," "People use social media heavily")</li>
+                    <li>List 3 blanks they probably have (e.g., "How AI companions actually work," "Psychological effects of AI friendships," "Long-term social implications")</li>
+                    <li>Aim to fill just those blanks - nothing extra</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>3. Pick One Big Idea</h3>
+                <ul>
+                    <li><strong>Focus:</strong> One core takeaway sticks better than ten facts</li>
+                    <li>Sum up your idea in 10 words or fewer (e.g., "AI complements but can't replace human emotional bonds")</li>
+                    <li>Test it on a friend; if they get it, move on</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>4. Build a Simple Skeleton (O-B-C)</h3>
+                
+                <table>
+                    <tr>
+                        <th>Part</th>
+                        <th>What to do</th>
+                        <th>Tip</th>
+                        <th>Time (for 5-min talk)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Opening</strong></td>
+                        <td>Hook + reason to listen</td>
+                        <td>Question, statistic, or mini-story</td>
+                        <td>45 sec</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Body</strong></td>
+                        <td>2-3 supporting points</td>
+                        <td>Use <strong>PEEL</strong> – Point, Explain, Example, Link</td>
+                        <td>3 min</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Close</strong></td>
+                        <td>Signal the end + call to action</td>
+                        <td>"Remember..." or "So next time..."</td>
+                        <td>45 sec</td>
+                    </tr>
+                </table>
+                
+                <div class="peel-method">
+                    <h4>PEEL Method Explained</h4>
+                    <p><strong>Point:</strong> State your main idea clearly</p>
+                    <p><strong>Explain:</strong> Provide reasoning or evidence</p>
+                    <p><strong>Example:</strong> Give a concrete illustration</p>
+                    <p><strong>Link:</strong> Connect back to your main argument</p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <h3>5. Add a Personal Touch</h3>
+                <ul>
+                    <li>Insert one story or analogy from campus life (e.g., "This reminds me of when our group project almost failed because we only communicated through chatbots")</li>
+                    <li>Keep it under 60 seconds; stories make data memorable</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>6. Practice the 3-Pass Method</h3>
+                <ul>
+                    <li><strong>Pass 1 – Quiet Read:</strong> Read notes silently to check flow</li>
+                    <li><strong>Pass 2 – Mirror Talk:</strong> Say it aloud while watching posture</li>
+                    <li><strong>Pass 3 – Record & Review:</strong> Use phone video; look for pace (120–150 wpm) and filler words ("um")</li>
+                    <li>Do all three passes; total time ≈ 15 minutes</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>7. Calm the Nerves (30-Second Routine)</h3>
+                <ul>
+                    <li><strong>Breathe:</strong> Deep inhale through nose, slow exhale through mouth</li>
+                    <li><strong>Power pose:</strong> Feet shoulder-width, shoulders back</li>
+                    <li><strong>Positive cue:</strong> Whisper your goal sentence</li>
+                    <li><strong>Walk up:</strong> Make eye contact with one friendly face first</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>8. Deliver With the 3 Vs</h3>
+                <ul>
+                    <li><strong>Voice:</strong> Loud enough for back row, vary tone</li>
+                    <li><strong>Verbal:</strong> Simple words; avoid jargon unless explained</li>
+                    <li><strong>Visual:</strong> Hands visible, purposeful gestures, natural smile</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>9. Handle Sudden Blanks (JAM-style)</h3>
+                <ul>
+                    <li>Pause, breathe, restate last sentence to buy 3-4 seconds</li>
+                    <li>If stuck, ask the audience a yes/no question – regains flow</li>
+                </ul>
+            </div>
+            
+            <div class="guide-step">
+                <h3>10. Collect Feedback & Iterate</h3>
+                <ul>
+                    <li>Ask two friends: "One thing clear? One thing to improve?"</li>
+                    <li>Note it in a "Speaker Log" (Google Keep/Notion)</li>
+                    <li>Apply one fix next time—constant 1% upgrades</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Ready-Made JAM Topics -->
+        <div class="presentation-section">
+            <h2>Ready-Made JAM Practice Topics</h2>
+            <p>Practice your impromptu speaking skills with these thought-provoking topics:</p>
+            
+            <div class="topic-card">
+                <h3>1. Should coding be a core subject from Class 1?</h3>
+                <p>Explore the pros and cons of introducing programming education at an early age.</p>
+            </div>
+            
+            <div class="topic-card">
+                <h3>2. Electric scooters: greener or riskier?</h3>
+                <p>Discuss the environmental benefits versus safety concerns of personal electric vehicles.</p>
+            </div>
+            
+            <div class="topic-card">
+                <h3>3. One invention I wish existed on campus</h3>
+                <p>Imagine and describe a practical innovation that would improve student life.</p>
+            </div>
+            
+            <div class="topic-card">
+                <h3>4. AI buddies vs. human friends – future of companionship</h3>
+                <p>Analyze how artificial intelligence might change social relationships in coming years.</p>
+            </div>
+            
+            <div class="topic-card">
+                <h3>5. CGPA doesn't define talent. Agree?</h3>
+                <p>Debate whether academic grades truly reflect a student's abilities and potential.</p>
+            </div>
+        </div>
+        
+        <div class="presentation-section">
+            <h2>About the Speaker</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-name">Susparsh Jakhmola</div>
+                    <div class="member-role">Speaker Of the Above Video</div>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text);">Susparsh demonstrates exceptional impromptu speaking abilities, showcasing confidence and clarity in spontaneous communication situations.</p>
+                </div>
+            </div>
+            
+            <h3 style="color: var(--accent); margin-top: 2rem;">Key Takeaways</h3>
+            <p>The Jam Session format helps develop:
+                <ul>
+                    <li>Quick thinking and mental agility</li>
+                    <li>Ability to organize thoughts rapidly</li>
+                    <li>Confidence in unplanned speaking situations</li>
+                    <li>Effective communication under pressure</li>
+                </ul>
+            </p>
+        </div>
+        
+        <div class="read-more">
+            <h2 style="color: var(--accent); border-bottom: 1px solid rgba(255, 209, 102, 0.2); padding-bottom: 0.5rem;">Related Activities</h2>
+            <div class="related-articles" id="relatedArticles">
+                <!-- Articles will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample presentation data
+        const presentations = [
+            {
+                id: 1,
+                title: "Profiling Sheet",
+                excerpt: "An overview of my personal attributes, aspirations, and core values.",
+                image: "../thumbnails/profile.png",
+                url: "2025-02-10.html",
+                date: "2025-02-10"
+            },
+            {
+                id: 2,
+                title: "Movie Review",
+                excerpt: "An analytical review of The Pursuit of Happyness highlighting its key themes.",
+                image: "../thumbnails/movie.png",
+                url: "2025-03-11.html",
+                date: "2025-03-11"
+            },
+            {
+                id:3,
+                title: "My Professional Portfolio | Resume & Cover Letter",
+                excerpt: "Below you'll find my professional resume and cover letter. These documents represent my skills, experience, and professional journey. I've carefully crafted them to showcase my qualifications and what I can bring to potential opportunities",
+                image: "../thumbnails/resume.png",
+                url: "2025-04-31.html",
+                date: "2025-04-31"
+            }
+        ];
+
+        // Function to load related articles
+        function loadRelatedPresentations() {
+            const container = document.getElementById('relatedArticles');
+            
+            presentations.forEach(presentation => {
+                const articleHTML = `
+                    <div class="article-card" onclick="window.location.href='${presentation.url}'">
+                        <img src="${presentation.image}" alt="${presentation.title}" class="article-img">
+                        <div class="article-content">
+                            <h3 class="article-title">${presentation.title}</h3>
+                            <p class="article-excerpt">${presentation.excerpt}</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span class="post-date" style="color: var(--accent); font-size: 0.9rem;">${presentation.date}</span>
+                                <a href="${presentation.url}" class="read-btn">View →</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.insertAdjacentHTML('beforeend', articleHTML);
+            });
+        }
+
+        // Load presentations when page loads
+        window.addEventListener('DOMContentLoaded', loadRelatedPresentations);
+    </script>
+</body>
+</html>

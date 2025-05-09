@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profiling and SWOC</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    body {
+      background-color: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: 120px;
+    }
+    .questions {
+      margin-top: 20px;
+    }
+    .questions h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #ffd166;
+    }
+    .question-item {
+      margin-bottom: 15px;
+      cursor: pointer;
+      padding: 15px;
+      background-color: #222;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      border-left: 4px solid transparent;
+    }
+    .question-item:hover {
+      background-color: #333;
+      border-left: 4px solid #ffd166;
+    }
+    .question-item.active {
+      background-color: #444;
+      border-left: 4px solid #ffd166;
+    }
+    .question-text {
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .answer-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: #1a1a1a;
+      border-radius: 0 0 5px 5px;
+    }
+    .answer-content {
+      padding: 15px;
+    }
+    .active + .answer-container {
+      max-height: 500px;
+    }
+    .back-button-container {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+    .back-button {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffd166;
+      border: 1px solid rgba(255, 209, 102, 0.3);
+      padding: 8px 15px 8px 10px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .back-button:hover {
+      background: rgba(255, 209, 102, 0.2);
+      border-color: #ffd166;
+      transform: translateX(-3px);
+    }
+    .back-button i {
+      margin-right: 5px;
+      font-size: 1.2rem;
+      color: #ffd166;
+    }
+    .profile-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to bottom, #0a192f 0%, rgba(10, 25, 47, 0.9) 80%, transparent 100%);
+      padding: 1.5rem 0 0;
+      z-index: 900;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6b6b, #ffd166);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      margin: 0;
+    }
+    .subtitle {
+      color: #ffd166;
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="back-button-container">
+    <a href="#" class="back-button" onclick="history.back()">
+      <i class="material-icons">arrow_back_ios</i> Back
+    </a>
+  </div>
+
+  <header class="profile-header">
+    <div>
+      <h1>Profiling and SWOC</h1>
+      <p class="subtitle">Professional Development Questions</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <div class="questions">
+      <h2>Questions</h2>
+      <div id="questionList"></div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      "Q.1: Write your career objective.",
+      "Q.2: Why do you want to be an engineer? Elaborate reasons.",
+      "Q.3: Write about projects or internship you have done/ are doing along with the learning.",
+      "Q.4: What would you consider a significant achievement in your life and why?",
+      "Q.5: Write about a failure of yours which you consider to share. What have you learned from it?",
+      "Q.6: What are your strengths? Write one or two instances where you have demonstrated your strengths.",
+      "Q.7: Write about your weaknesses. What are you doing to overcome your weaknesses?",
+      "Q.8: What is the most difficult moment that you have faced in your life so far? What qualities helped you to overcome the moment?",
+      "Q.9: Apart from academics, what else are you interested in? Make a separate list in terms of extracurricular activities, sports and any other interests.",
+      "Q.10: Give an example of an area, concept or thing that you are absolutely passionate about.",
+      "Q.11: Describe yourself as an individual in 5 lines.",
+      "Q.12: What kinds of people do you enjoy working with?",
+      "Q.13: What kinds of people you don't want to work with? What would you do if they became your senior in your dream job?",
+      "Q.14: What do you expect from your first job? Prioritize and write in order.",
+      "Q.15: In the past year, what have you been dissatisfied about in your performance?",
+      "Q.16: Rate yourself out of 5 in verbal communication. What are you doing to improve your communication skills?",
+      "Q.17: Who is your role model? What qualities of that person you would like to see in your personality and why?",
+      "Q.18: Write a few lines about your friends. Do you think they help/ may help you in achieving your goals? If yes, how? If no, why do you accompany them?",
+      "Q.19: Write 3 leadership qualities. How many do you possess? Write an instance where you have applied those qualities.",
+      "Q.20: So finally, tell us something more about yourself or introduce yourself."
+    ];
+
+    const answers = [
+      "To secure a challenging position in a reputable organization where I can utilize my skills and knowledge to contribute to the company's success while having opportunities for professional growth.",
+      "I want to be an engineer because I enjoy solving complex problems and creating innovative solutions. Engineering provides the perfect platform to apply my analytical skills and creativity to develop technologies that can improve people's lives.",
+      "I completed a summer internship at XYZ Technologies where I worked on developing a mobile app. I learned about agile development methodologies, UI/UX design principles, and how to collaborate effectively in a team environment.",
+      "Winning the regional science fair in high school was a significant achievement because it validated my problem-solving skills and gave me confidence in my technical abilities. It also taught me the value of perseverance.",
+      "I once failed to meet a project deadline because I underestimated the time required. From this, I learned better time management skills and the importance of breaking large tasks into smaller milestones.",
+      "My strengths include problem-solving, attention to detail, and teamwork. For example, during a group project, I identified a critical flaw in our design early on, which saved us significant rework later.",
+      "I sometimes struggle with public speaking. To overcome this, I've joined a Toastmasters club and practice presentations regularly to build my confidence.",
+      "The most difficult moment was when I had to balance academics while caring for a sick family member. My resilience, time management skills, and support system helped me through this challenging period.",
+      "Extracurricular: Debate club, Chess team\nSports: Badminton, Swimming\nOther interests: Photography, Reading science fiction",
+      "I'm absolutely passionate about renewable energy technologies. The potential to create sustainable solutions for our energy needs fascinates me and drives my academic focus.",
+      "1. I'm a curious and persistent learner.\n2. I value integrity and honesty.\n3. I enjoy collaborative work environments.\n4. I'm adaptable to new situations.\n5. I strive for excellence in everything I do.",
+      "I enjoy working with open-minded people who are passionate about their work, willing to share knowledge, and value constructive feedback.",
+      "I prefer not to work with people who are inflexible or resistant to new ideas. If such a person became my senior, I would focus on understanding their perspective while professionally presenting alternative solutions when appropriate.",
+      "1. Learning opportunities\n2. Good work culture\n3. Competitive compensation\n4. Career growth prospects\n5. Work-life balance",
+      "I've been dissatisfied with my tendency to procrastinate on less interesting tasks. I'm working on improving my discipline through better scheduling and task prioritization.",
+      "I'd rate myself 3.5/5. To improve, I'm practicing speaking clearly and concisely, expanding my vocabulary, and actively participating in discussions.",
+      "My role model is Marie Curie. I admire her perseverance, intellectual curiosity, and dedication to science despite numerous challenges. I strive to emulate these qualities in my own life.",
+      "My friends are supportive and intellectually stimulating. They help me achieve my goals by providing honest feedback, sharing knowledge, and encouraging me during challenging times.",
+      "1. Vision - ability to set clear goals\n2. Empathy - understanding team members' perspectives\n3. Decisiveness - making timely decisions\n\nI possess empathy and decisiveness. I demonstrated these during a college event where I helped resolve team conflict and made critical decisions under pressure.",
+      "I am a self-motivated and adaptable learner with a keen interest in technology. I believe in continuous growth, enjoy team collaboration, and always strive to turn challenges into opportunities."
+    ];
+
+    const questionList = document.getElementById('questionList');
+
+    questions.forEach((q, index) => {
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question-item';
+      questionDiv.innerHTML = `<div class="question-text">${q}</div>`;
+
+      const answerDiv = document.createElement('div');
+      answerDiv.className = 'answer-container';
+      answerDiv.innerHTML = `<div class="answer-content">${answers[index]}</div>`;
+
+      questionDiv.addEventListener('click', () => {
+        questionDiv.classList.toggle('active');
+      });
+
+      questionList.appendChild(questionDiv);
+      questionList.appendChild(answerDiv);
+    });
+  </script>
+</body>
+</html>
